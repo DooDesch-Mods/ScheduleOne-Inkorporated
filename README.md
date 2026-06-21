@@ -17,6 +17,13 @@ Inkorporated is primarily a **library / dependency**. On its own it adds no tatt
 tattoo packs depend on. Install it alongside a tattoo pack (or flip on the bundled example pack) and
 the new tattoos show up in the tattoo shop under their placement category (Chest, Left/Right Arm, Face).
 
+## Documentation & example
+
+- 📖 **[Wiki](https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated/wiki)** - the full guide for making
+  tattoos: pack format, the API, authoring + UV alignment, multiplayer/NPCs, troubleshooting.
+- 🧩 **[Example repo](https://github.com/DooDesch-Mods/ScheduleOne-InkorporatedExample)** - a working,
+  copy-me template showing **both** routes side by side: a no-code content pack and a code mod using the API.
+
 ## Features
 
 - **Real tattoos, not decals.** Each custom tattoo is registered as a proper avatar layer through the
