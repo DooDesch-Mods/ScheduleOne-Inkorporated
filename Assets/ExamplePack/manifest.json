@@ -1,0 +1,14 @@
+{
+  "name": "Inkorporated Examples",
+  "author": "DooDesch",
+  "tattoos": [
+    { "id": "heart",    "name": "Heart",     "placement": "chest",    "file": "heart.png" },
+    { "id": "cross",    "name": "Cross",     "placement": "chest",    "file": "cross.png" },
+    { "id": "star",     "name": "Star",      "placement": "leftarm",  "file": "star.png" },
+    { "id": "diamond",  "name": "Diamond",   "placement": "leftarm",  "file": "diamond.png" },
+    { "id": "bolt",     "name": "Lightning", "placement": "rightarm", "file": "bolt.png" },
+    { "id": "triangle", "name": "Triangle",  "placement": "rightarm", "file": "triangle.png" },
+    { "id": "ring",     "name": "Ring",      "placement": "face",     "file": "ring.png" },
+    { "id": "xmark",    "name": "X",         "placement": "face",     "file": "xmark.png" }
+  ]
+}

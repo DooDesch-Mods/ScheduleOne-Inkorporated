@@ -1,0 +1,13 @@
+{
+  "name": "Inkorporated",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated",
+  "description": "Custom tattoo framework. Mods ship tattoo packs (a PNG folder + manifest, or via the API) and Inkorporated adds them to the tattoo shop - rendered, saved and co-op-synced like vanilla.",
+  "dependencies": [
+    "LavaGang-MelonLoader-0.7.3",
+    "ifBars-S1API_Forked-3.0.5"
+  ],
+  "contributors": [
+    "DooDesch"
+  ]
+}
