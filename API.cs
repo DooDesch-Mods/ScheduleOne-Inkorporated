@@ -45,5 +45,35 @@ namespace Inkorporated
                 Source = string.IsNullOrWhiteSpace(source) ? "API" : source
             });
         }
+
+        /// <summary>
+        /// Register a tattoo from a PNG embedded in YOUR mod's DLL (the calling assembly), so you don't have to
+        /// write the resource-loading boilerplate. <paramref name="resourceName"/> is the embedded resource name
+        /// (e.g. "MyMod.Assets.skull.png"); a trailing-suffix match is accepted, so "skull.png" works too.
+        /// Loaded lazily when first needed.
+        /// </summary>
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        public static bool RegisterTattooFromResource(string id, string displayName, TattooPlacement placement, string resourceName, float price = 0f, string source = "API")
+        {
+            return RegisterTattooFromResource(id, displayName, placement, System.Reflection.Assembly.GetCallingAssembly(), resourceName, price, source);
+        }
+
+        /// <summary>
+        /// Register a tattoo from a PNG embedded in the given <paramref name="assembly"/> (use this overload if
+        /// the PNG lives in a different assembly than the caller). Loaded lazily when first needed.
+        /// </summary>
+        public static bool RegisterTattooFromResource(string id, string displayName, TattooPlacement placement, System.Reflection.Assembly assembly, string resourceName, float price = 0f, string source = "API")
+        {
+            return TattooRegistry.Add(new TattooDef
+            {
+                Id = id,
+                DisplayName = string.IsNullOrWhiteSpace(displayName) ? id : displayName,
+                Placement = placement,
+                Price = price < 0f ? 0f : price,
+                ResourceAssembly = assembly,
+                ResourceName = resourceName,
+                Source = string.IsNullOrWhiteSpace(source) ? "API" : source
+            });
+        }
     }
 }

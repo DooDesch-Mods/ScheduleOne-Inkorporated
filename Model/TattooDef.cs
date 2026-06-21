@@ -35,6 +35,12 @@ namespace Inkorporated.Model
         /// <summary>Optional preloaded texture (supplied by API callers instead of a file).</summary>
         public Texture2D Texture;
 
+        /// <summary>Optional embedded-resource source (the modder's assembly) - loaded lazily when first needed.</summary>
+        public System.Reflection.Assembly ResourceAssembly;
+
+        /// <summary>Embedded resource name of the PNG inside <see cref="ResourceAssembly"/> (exact, or a suffix).</summary>
+        public string ResourceName;
+
         /// <summary>Originating pack name (or "API"); used for logging and a stable unique key.</summary>
         public string Source;
 

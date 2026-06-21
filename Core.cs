@@ -9,7 +9,7 @@ using MelonLoader;
 using UnityEngine;
 #endif
 
-[assembly: MelonInfo(typeof(Inkorporated.Core), "Inkorporated", "1.0.0", "DooDesch", "https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated")]
+[assembly: MelonInfo(typeof(Inkorporated.Core), "Inkorporated", "1.1.0", "DooDesch", "https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated")]
 [assembly: MelonGame("TVGS", "Schedule I")]
 [assembly: MelonOptionalDependencies("ModManager&PhoneApp")]
 
@@ -45,7 +45,7 @@ namespace Inkorporated
                 Log.Warning("Harmony patch failed: " + e.Message);
             }
 
-            Log.Msg($"Inkorporated 1.0.0 - {packDefs} pack tattoo(s) loaded ({TattooRegistry.AllDefs.Count} total). Shop injection armed.");
+            Log.Msg($"Inkorporated 1.1.0 - {packDefs} pack tattoo(s) loaded ({TattooRegistry.AllDefs.Count} total). Shop injection armed.");
             Log.Msg($"Drop packs in: {PackLoader.PacksRoot}");
         }
 

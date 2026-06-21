@@ -79,15 +79,24 @@ namespace Inkorporated.Registration
                 Texture2D tex = def.Texture;
                 if (tex == null)
                 {
-                    if (string.IsNullOrEmpty(def.PngPath))
+                    if (!string.IsNullOrEmpty(def.PngPath))
                     {
-                        Core.Log?.Warning($"Tattoo '{def.Key}': no texture and no PNG path.");
+                        tex = TextureUtils.LoadTextureFromFile(def.PngPath);
+                    }
+                    else if (def.ResourceAssembly != null && !string.IsNullOrEmpty(def.ResourceName))
+                    {
+                        byte[] bytes = ReadResource(def.ResourceAssembly, def.ResourceName);
+                        if (bytes != null) tex = TextureUtils.LoadTextureFromBytes(bytes);
+                    }
+                    else
+                    {
+                        Core.Log?.Warning($"Tattoo '{def.Key}': no texture, PNG path or embedded resource.");
                         return false;
                     }
-                    tex = TextureUtils.LoadTextureFromFile(def.PngPath);
+
                     if (tex == null)
                     {
-                        Core.Log?.Warning($"Tattoo '{def.Key}': failed to load PNG '{def.PngPath}'.");
+                        Core.Log?.Warning($"Tattoo '{def.Key}': failed to load image.");
                         return false;
                     }
                 }
@@ -110,6 +119,42 @@ namespace Inkorporated.Registration
             {
                 Core.Log?.Warning($"Tattoo '{def.Key}': registration error - {ex.Message}");
                 return false;
+            }
+        }
+
+        // Reads an embedded PNG out of a mod's assembly. Tries the exact resource name first, then a
+        // forgiving suffix match so callers can pass just "file.png" instead of the full "Namespace.file.png".
+        private static byte[] ReadResource(System.Reflection.Assembly asm, string name)
+        {
+            try
+            {
+                string actual = name;
+                if (asm.GetManifestResourceStream(actual) == null)
+                {
+                    foreach (string n in asm.GetManifestResourceNames())
+                    {
+                        if (n == name || n.EndsWith("." + name, StringComparison.OrdinalIgnoreCase))
+                        {
+                            actual = n;
+                            break;
+                        }
+                    }
+                }
+
+                using System.IO.Stream s = asm.GetManifestResourceStream(actual);
+                if (s == null)
+                {
+                    Core.Log?.Warning($"Embedded resource not found: '{name}' in {asm.GetName().Name}");
+                    return null;
+                }
+                using var ms = new System.IO.MemoryStream();
+                s.CopyTo(ms);
+                return ms.ToArray();
+            }
+            catch (Exception ex)
+            {
+                Core.Log?.Warning($"Embedded resource read failed '{name}': {ex.Message}");
+                return null;
             }
         }
 

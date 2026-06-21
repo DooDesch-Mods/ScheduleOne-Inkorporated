@@ -3,6 +3,13 @@
 All notable changes to Inkorporated are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-06-21
+
+### Added
+- `Inkorporated.API.RegisterTattooFromResource(...)` - register a tattoo from a PNG embedded in your mod's
+  DLL with one call (the calling assembly is detected automatically; a trailing-suffix resource-name match is
+  accepted), so code mods no longer need to write the embedded-resource-loading boilerplate.
+
 ## [1.0.0] - 2026-06-21
 
 Initial release.
