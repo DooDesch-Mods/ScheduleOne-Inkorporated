@@ -5,9 +5,6 @@ using Inkorporated.Content;
 using Inkorporated.Registration;
 using Inkorporated.Shop;
 using MelonLoader;
-#if DEBUG
-using UnityEngine;
-#endif
 
 [assembly: MelonInfo(typeof(Inkorporated.Core), "Inkorporated", "1.1.0", "DooDesch", "https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated")]
 [assembly: MelonGame("TVGS", "Schedule I")]
@@ -53,32 +50,6 @@ namespace Inkorporated
         {
             // The customization UI is rebuilt with the scene; allow our prefix to re-inject next time.
             ShopInjector.Reset();
-#if DEBUG
-            _inWorld = false;
-#endif
         }
-
-#if DEBUG
-        private bool _inWorld;
-        private bool _dumped;
-        private float _t;
-
-        public override void OnSceneWasLoaded(int buildIndex, string sceneName)
-        {
-            _inWorld = sceneName == "Main";
-        }
-
-        // DEBUG-only: export the built-in tattoo textures as UV templates a few seconds after entering the world
-        // (Resources.Load works in-world without opening the shop). Runs once per session.
-        public override void OnUpdate()
-        {
-            if (!_inWorld || _dumped) return;
-            _t += Time.deltaTime;
-            if (_t < 3f) return;
-            _dumped = true;
-            try { Dev.TemplateDumper.DumpAll(); }
-            catch (Exception e) { Log.Warning("template dump failed: " + e.Message); }
-        }
-#endif
     }
 }

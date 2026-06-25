@@ -25,7 +25,12 @@ namespace Inkorporated.Dev
             ["face"] = new[] { "Face_ForeheadCross", "Face_Sword", "Face_Teardrop", "Face_Tribal" }
         };
 
-        public static void DumpAll()
+        /// <summary>
+        /// Exports all built-in tattoo textures as UV templates. Safe to call repeatedly. Returns a short summary
+        /// line (also written to the MelonLogger) so callers can surface it (e.g. in the Snitch panel log).
+        /// Must run on the main thread while in-world (Resources.Load needs the avatar resources loaded).
+        /// </summary>
+        public static string Dump()
         {
             string root = Path.Combine(MelonEnvironment.UserDataDirectory, "Inkorporated", "Templates");
             Directory.CreateDirectory(root);
@@ -57,7 +62,9 @@ namespace Inkorporated.Dev
                 }
             }
 
-            Core.Log?.Msg($"[template] Dumped {ok} built-in tattoo template(s) ({fail} failed) -> {root}");
+            string summary = $"Dumped {ok} built-in tattoo template(s) ({fail} failed) -> {root}";
+            Core.Log?.Msg($"[template] {summary}");
+            return summary;
         }
 
         private static bool TryDump(Texture2D src, string path)
