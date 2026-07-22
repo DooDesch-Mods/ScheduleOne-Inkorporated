@@ -1,6 +1,6 @@
 # Inkorporated - Custom Tattoos for Schedule I
 
-> 🛟 **Need help or found a bug?** Get support at [support.doodesch.de](https://support.doodesch.de).
+> 🛟 **Need help or found a bug?** Get support at [support.doodesch.de/inkorporated](https://support.doodesch.de/inkorporated).
 
 > The tattoo framework for Schedule I. Inkorporated lets mods add their own PNG tattoos to the
 > in-game tattoo shop - drop a pack folder, or register via the API - and the game treats them
