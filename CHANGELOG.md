@@ -3,6 +3,12 @@
 All notable changes to Inkorporated are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] - 2026-07-23
+
+### Fixed
+- Custom tattoo prices in the shop now read "$250" like the built-in ones, instead of a bare "250" -
+  the rows use the game's own money formatting again.
+
 ## [1.1.0] - 2026-06-21
 
 ### Added

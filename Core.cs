@@ -6,7 +6,7 @@ using Inkorporated.Registration;
 using Inkorporated.Shop;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(Inkorporated.Core), "Inkorporated", "1.1.0", "DooDesch", "https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated")]
+[assembly: MelonInfo(typeof(Inkorporated.Core), "Inkorporated", "1.1.1", "DooDesch", "https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated")]
 [assembly: MelonGame("TVGS", "Schedule I")]
 [assembly: MelonOptionalDependencies("ModManager&PhoneApp")]
 
@@ -42,7 +42,7 @@ namespace Inkorporated
                 Log.Warning("Harmony patch failed: " + e.Message);
             }
 
-            Log.Msg($"Inkorporated 1.1.0 - {packDefs} pack tattoo(s) loaded ({TattooRegistry.AllDefs.Count} total). Shop injection armed.");
+            Log.Msg($"Inkorporated {Info.Version} - {packDefs} pack tattoo(s) loaded ({TattooRegistry.AllDefs.Count} total). Shop injection armed.");
             Log.Msg($"Drop packs in: {PackLoader.PacksRoot}");
         }
 
@@ -51,5 +51,9 @@ namespace Inkorporated
             // The customization UI is rebuilt with the scene; allow our prefix to re-inject next time.
             ShopInjector.Reset();
         }
+
+#if DEBUG
+        public override void OnUpdate() => Dev.ShopSelfTest.Tick();
+#endif
     }
 }
