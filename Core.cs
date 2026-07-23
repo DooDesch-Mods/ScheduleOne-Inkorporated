@@ -6,7 +6,7 @@ using Inkorporated.Registration;
 using Inkorporated.Shop;
 using MelonLoader;
 
-[assembly: MelonInfo(typeof(Inkorporated.Core), "Inkorporated", "1.1.1", "DooDesch", "https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated")]
+[assembly: MelonInfo(typeof(Inkorporated.Core), "Inkorporated", "1.1.2", "DooDesch", "https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated")]
 [assembly: MelonGame("TVGS", "Schedule I")]
 [assembly: MelonOptionalDependencies("ModManager&PhoneApp")]
 

@@ -3,6 +3,12 @@
 All notable changes to Inkorporated are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.2] - 2026-07-23
+
+### Changed
+- The shipped READMEs now link the per-product support page
+  ([support.doodesch.de/inkorporated](https://support.doodesch.de/inkorporated)). No gameplay changes.
+
 ## [1.1.1] - 2026-07-23
 
 ### Fixed
