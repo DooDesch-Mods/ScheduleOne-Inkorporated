@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using HarmonyLib;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppScheduleOne.UI.CharacterCustomization;
@@ -163,7 +164,13 @@ namespace Inkorporated.Shop
                 opt.RequireLevel = false;
 
                 if (opt.NameLabel != null) opt.NameLabel.text = def.DisplayName;
-                if (opt.PriceLabel != null) opt.PriceLabel.text = def.Price > 0f ? Mathf.RoundToInt(def.Price).ToString() : "Free";
+                // Same "$250" the game's own Option.Awake produces via MoneyManager.FormatAmount (en-US {0:C0}).
+                // Replicated locally: referencing the interop MoneyManager would drag in FishNet, and the managed
+                // mod runtime runs globalization-invariant, so new CultureInfo("en-US") throws here.
+                if (opt.PriceLabel != null)
+                    opt.PriceLabel.text = def.Price > 0f
+                        ? "$" + Mathf.RoundToInt(def.Price).ToString("N0", CultureInfo.InvariantCulture)
+                        : "Free";
 
                 if (!clone.activeSelf) clone.SetActive(true);
                 return true;
