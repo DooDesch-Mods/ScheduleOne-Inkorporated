@@ -24,7 +24,6 @@
 
 - **Schedule I** (IL2CPP) with **MelonLoader 0.7.3+**.
 - **S1API** (pulled in as a dependency).
-- Optional: **Mod Manager & Phone App** for the in-game settings UI.
 
 ## Using it
 
@@ -45,8 +44,7 @@ mark to a full sleeve). See the example pack and the full guide on
 
 ## Settings
 
-`LoadExamplePack` (default `false`) - drop the bundled example pack on disk as a template. Editable in the
-Mod Manager & Phone App UI or `UserData/MelonPreferences.cfg`.
+`LoadExamplePack` (default `false`) - drop the bundled example pack on disk as a template. Editable in `UserData/MelonPreferences.cfg`.
 
 ## License
 

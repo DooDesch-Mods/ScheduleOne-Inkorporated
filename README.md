@@ -44,7 +44,6 @@ the new tattoos show up in the tattoo shop under their placement category (Chest
 | Schedule I | IL2CPP (current Steam public build) |
 | MelonLoader | `0.7.3+` |
 | S1API | [ifBars/S1API_Forked](https://thunderstore.io/c/schedule-i/p/ifBars/S1API_Forked/) (Resources registry, avatar layer factory) |
-| Mod Manager & Phone App | [Nexus mods/397](https://www.nexusmods.com/schedule1/mods/397) - optional, for the in-game settings UI |
 
 ## Installation
 
@@ -129,7 +128,7 @@ before the NPC's appearance is applied. On Thunderstore, list `DooDesch-Inkorpor
 
 ## Configuration
 
-Settings live in the **Mod Manager & Phone App** UI in-game, or in `UserData/MelonPreferences.cfg` under
+Settings live in `UserData/MelonPreferences.cfg` under
 `Inkorporated_01_Main`.
 
 | Setting | Default | What it does |
@@ -157,7 +156,6 @@ are needed.
 - **DooDesch** - mod author.
 - **[ifBars/S1API](https://github.com/ifBars/S1API)** - the modding API this is built on (texture/avatar-layer
   helpers + the Resources registry that make custom tattoos possible).
-- **Prowiler** - Mod Manager & Phone App (in-game settings UI).
 
 ## License
 
