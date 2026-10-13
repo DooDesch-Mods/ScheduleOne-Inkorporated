@@ -12,6 +12,7 @@
 ![MelonLoader](https://img.shields.io/badge/MelonLoader-0.7.3+-green)
 ![S1API](https://img.shields.io/badge/S1API-required-orange)
 ![Type](https://img.shields.io/badge/type-library%2Fdependency-lightgrey)
+[![Polyfill](https://polyfill.doomods.com/badge/inkorporated.svg)](https://polyfill.doomods.com/mod/inkorporated)
 
 Inkorporated is primarily a **library / dependency**. On its own it adds no tattoos - it's the thing
 tattoo packs depend on. Install it alongside a tattoo pack (or flip on the bundled example pack) and
