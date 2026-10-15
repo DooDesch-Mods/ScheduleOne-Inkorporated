@@ -7,7 +7,7 @@
 > exactly like vanilla tattoos: they render on the avatar, persist in saves and sync in co-op.
 > Built on [S1API](https://github.com/ifBars/S1API).
 
-![Version](https://img.shields.io/badge/version-1.1.3-blue)
+![Version](https://img.shields.io/badge/version-1.1.4-blue)
 ![Game](https://img.shields.io/badge/game-Schedule%20I-purple)
 ![MelonLoader](https://img.shields.io/badge/MelonLoader-0.7.3+-green)
 ![S1API](https://img.shields.io/badge/S1API-required-orange)
@@ -15,6 +15,8 @@
 [![Polyfill](https://polyfill.doomods.com/badge/inkorporated.svg)](https://polyfill.doomods.com/mod/inkorporated)
 
 [![MLVScan Inkorporated.dll](https://mlvscan.com/attestations/att_61uSb3i3lWVoHVb34_TBkQbC/badge.svg)](https://mlvscan.com/attestations/att_61uSb3i3lWVoHVb34_TBkQbC)
+
+![Custom tattoos in the tattoo shop, worn by the player](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/header.jpg)
 
 Inkorporated is primarily a **library / dependency**. On its own it adds no tattoos - it's the thing
 tattoo packs depend on. Install it alongside a tattoo pack (or flip on the bundled example pack) and
@@ -39,6 +41,16 @@ the new tattoos show up in the tattoo shop under their placement category (Chest
   clones of built-in tattoos - nothing to cook in Unity.
 - **Bundled example pack** (off by default) gives players a few ready-made tattoos and authors a working
   template to copy.
+
+## Screenshots
+
+The tattoos shown come from a demo pack.
+
+| | |
+|---|---|
+| ![Custom tattoos listed in the tattoo shop](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/shop.jpg) | ![Swallows across the chest](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/swallows.jpg) |
+| ![Moth on the chest](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/moth.jpg) | ![Rose on the left arm](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/rose.jpg) |
+| ![Dagger on the right arm](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/dagger.jpg) | ![Stars under the eye](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/stars.jpg) |
 
 ## Requirements
 

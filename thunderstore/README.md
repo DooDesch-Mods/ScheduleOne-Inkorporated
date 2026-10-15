@@ -7,12 +7,14 @@
 > avatar, persist in saves and sync in co-op. On its own this mod adds no tattoos; it's the dependency
 > tattoo packs are built on.
 
-![Version](https://img.shields.io/badge/version-1.1.3-blue)
+![Version](https://img.shields.io/badge/version-1.1.4-blue)
 ![Game](https://img.shields.io/badge/game-Schedule%20I-purple)
 ![MelonLoader](https://img.shields.io/badge/MelonLoader-0.7.3+-green)
 ![S1API](https://img.shields.io/badge/S1API-required-orange)
 
 [![MLVScan Inkorporated.dll](https://mlvscan.com/attestations/att_61uSb3i3lWVoHVb34_TBkQbC/badge.svg)](https://mlvscan.com/attestations/att_61uSb3i3lWVoHVb34_TBkQbC)
+
+![Custom tattoos in the tattoo shop, worn by the player](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/header.jpg)
 
 ## What it does
 
@@ -21,6 +23,15 @@
   built-in tattoos (everyone needs the same mod + pack to see them; others just don't render them).
 - Tattoo packs are plain folders of PNGs + a tiny `manifest.json` - no code required. Code mods can also
   register tattoos through the API.
+
+## Screenshots
+
+The tattoos shown come from a demo pack.
+
+![Custom tattoos listed in the tattoo shop](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/shop.jpg)
+![Swallows across the chest](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/swallows.jpg)
+![Rose on the left arm](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/rose.jpg)
+![Stars under the eye](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/stars.jpg)
 
 ## Requirements
 
