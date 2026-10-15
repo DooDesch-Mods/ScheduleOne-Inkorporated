@@ -3,6 +3,19 @@
 All notable changes to Inkorporated are documented here. This project adheres to
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.4] - 2026-10-15
+
+### Fixed
+- Custom tattoos show in the tattoo shop and on your character again, also after loading a save. Schedule I 0.4.7
+  had stopped drawing them.
+
+### Changed
+- Runs on Schedule I 0.4.7f12.
+- Needs S1API 3.2.1, up from 3.1.1. Update it along with the mod.
+
+### For mod authors
+- Packs and `API.RegisterTattoo` calls work unchanged. Tattoo ids keep their `Avatar/Layers/Tattoos/custom/...` path.
+
 ## [1.1.3] - 2026-08-01
 
 ### Changed

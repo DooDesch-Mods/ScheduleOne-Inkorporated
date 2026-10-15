@@ -29,14 +29,14 @@ the new tattoos show up in the tattoo shop under their placement category (Chest
 
 ## Features
 
-- **Real tattoos, not decals.** Each custom tattoo is registered as a proper avatar layer through the
-  game's own `Resources.Load` pipeline, so it renders, **saves**, and **syncs in multiplayer** just like
+- **Real tattoos, not decals.** Each custom tattoo is registered as an avatar object in the game's own
+  avatar object library, so it renders, **saves**, and **syncs in multiplayer** just like
   a built-in tattoo (any client with the same mod + pack sees it; others simply don't render it - no crash).
 - **Two ways to ship tattoos** - a drop-in **pack folder** (PNGs + a tiny `manifest.json`, no code), or a
   C# **API** for code mods that build textures at runtime.
 - **All placements:** chest, left arm, right arm and face.
 - **No asset bundles, no engine patching.** Custom textures are loaded from PNG at runtime and wrapped into
-  cloned avatar layers - nothing to cook in Unity.
+  clones of built-in tattoos - nothing to cook in Unity.
 - **Bundled example pack** (off by default) gives players a few ready-made tattoos and authors a working
   template to copy.
 
@@ -44,9 +44,9 @@ the new tattoos show up in the tattoo shop under their placement category (Chest
 
 | Component | Version / Source |
 |-----------|------------------|
-| Schedule I | IL2CPP (current Steam public build) |
+| Schedule I | IL2CPP, `0.4.7f12` or later |
 | MelonLoader | `0.7.3+` |
-| S1API | [ifBars/S1API_Forked](https://thunderstore.io/c/schedule-i/p/ifBars/S1API_Forked/) (Resources registry, avatar layer factory) |
+| S1API | [ifBars/S1API_Forked](https://thunderstore.io/c/schedule-i/p/ifBars/S1API_Forked/) `3.2.1+` |
 
 ## Installation
 
@@ -125,9 +125,7 @@ API.RegisterTattooFromResource("rose", "Rose", TattooPlacement.LeftArm, "MyMod.A
 ```
 
 `TattooPlacement` = `Chest | LeftArm | RightArm | Face`. `source` namespaces your ids (used for
-de-duplication and the registered resource path). Because tattoos register through `Resources.Load`, the
-same custom path also works for S1API NPC appearances (`WithBodyLayer`/`WithFaceLayer`) - just register
-before the NPC's appearance is applied. On Thunderstore, list `DooDesch-Inkorporated` as a dependency.
+de-duplication and the registered avatar object id). On Thunderstore, list `DooDesch-Inkorporated` as a dependency.
 
 ## Configuration
 
@@ -140,25 +138,25 @@ Settings live in `UserData/MelonPreferences.cfg` under
 
 ## How it works
 
-For each custom tattoo, Inkorporated loads the PNG into a `Texture2D`, clones a built-in `AvatarLayer` of
-the matching placement (via S1API's `AvatarLayerFactory`) with the texture swapped in, and registers it at a
-custom Resources path (S1API's `RuntimeResourceRegistry` patches `Resources.Load`). The shop buttons are
-added by cloning an existing option in the tattoo-shop UI. From there the game's own avatar pipeline loads,
+For each custom tattoo, Inkorporated loads the PNG into a `Texture2D`, clones a built-in tattoo of the
+matching placement with the texture swapped in, and enters the clone in the game's `AvatarObjectLibrary`
+under its own id. All tattoos register on the first scene load, before any saved appearance is applied.
+The shop buttons are added by cloning an existing option in the tattoo-shop UI. From there the game's own avatar pipeline loads,
 renders, saves and networks the tattoo like any vanilla one - which is why no asset bundles or render hooks
 are needed.
 
 ## Compatibility
 
 - IL2CPP build only (current Steam public branch).
-- **Multiplayer:** custom tattoos are transmitted as their resource-path string. Every player needs
+- **Multiplayer:** custom tattoos are transmitted as their avatar object id. Every player needs
   Inkorporated **and the same pack** for them to render on each other; players without it simply don't show
   that tattoo (no desync, no crash).
 
 ## Credits
 
 - **DooDesch** - mod author.
-- **[ifBars/S1API](https://github.com/ifBars/S1API)** - the modding API this is built on (texture/avatar-layer
-  helpers + the Resources registry that make custom tattoos possible).
+- **[ifBars/S1API](https://github.com/ifBars/S1API)** - the modding API this is built on (texture loading
+  helpers).
 
 ## License
 

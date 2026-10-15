@@ -17,7 +17,7 @@
 ## What it does
 
 - Adds custom tattoos to the tattoo shop under their placement category (Chest, Left/Right Arm, Face).
-- Real avatar layers via the game's own pipeline - they **render, save and sync in multiplayer** like
+- Registered in the game's own avatar library - they **render, save and sync in multiplayer** like
   built-in tattoos (everyone needs the same mod + pack to see them; others just don't render them).
 - Tattoo packs are plain folders of PNGs + a tiny `manifest.json` - no code required. Code mods can also
   register tattoos through the API.
