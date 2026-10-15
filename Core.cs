@@ -14,8 +14,8 @@ namespace Inkorporated
     /// <summary>
     /// MelonLoader entry point for Inkorporated. On init it loads user tattoo packs (metadata only) and arms the
     /// Harmony patch that injects shop buttons when the tattoo-shop UI awakes. Custom tattoo textures are realized
-    /// lazily (the first time the shop opens), so the avatar resources are guaranteed loaded. Other mods can add
-    /// tattoos via <see cref="API"/>.
+    /// on the first scene load, once the game's avatar object library is filled and before a save applies an
+    /// appearance that wears one. Other mods can add tattoos via <see cref="API"/>.
     /// </summary>
     public sealed class Core : MelonMod
     {
@@ -44,6 +44,8 @@ namespace Inkorporated
             Log.Msg($"Inkorporated {Info.Version} - {packDefs} pack tattoo(s) loaded ({TattooRegistry.AllDefs.Count} total). Shop injection armed.");
             Log.Msg($"Drop packs in: {PackLoader.PacksRoot}");
         }
+
+        public override void OnSceneWasLoaded(int buildIndex, string sceneName) => TattooRegistry.RegisterAll();
 
         public override void OnSceneWasUnloaded(int buildIndex, string sceneName)
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DooDesch.AvatarKit;
 using Inkorporated.Model;
 using S1API.Rendering;
 using UnityEngine;
@@ -8,10 +9,12 @@ using UnityEngine;
 namespace Inkorporated.Registration
 {
     /// <summary>
-    /// Master list of custom tattoos and their lazy registration with the game.
-    /// Registration clones a built-in <c>AvatarLayer</c> of the same placement, swaps in the custom texture, and
-    /// registers it at a custom Resources path via S1API (which patches Resources.Load). Lazy = done the first
-    /// time the tattoo is needed (when the shop opens), guaranteeing the avatar resources are loaded.
+    /// Master list of custom tattoos and their registration with the game.
+    /// Registration clones the avatar object of a built-in tattoo of the same placement, swaps in the custom
+    /// texture and enters the clone in the game's AvatarObjectLibrary under the tattoo's own id
+    /// (<see cref="AvatarLook.RegisterCustomLayer"/>). The game resolves every applied tattoo by that id - shop
+    /// preview, the player's saved appearance and other players' appearances alike - so all tattoos are
+    /// registered as soon as the library is loaded (<see cref="RegisterAll"/>), before any save applies one.
     /// </summary>
     internal static class TattooRegistry
     {
@@ -26,8 +29,39 @@ namespace Inkorporated.Registration
             if (def == null || string.IsNullOrWhiteSpace(def.Id)) return false;
             if (!_keys.Add(def.Key)) return false;
             _all.Add(def);
+            // Added after the first scene load (a mod registering late): realise it now rather than at the next
+            // shop visit, so an appearance that already carries it resolves.
+            if (_registeredAll) EnsureRegistered(def);
             return true;
         }
+
+        private static bool _registeredAll;
+
+        /// <summary>
+        /// Registers every known tattoo with the avatar object library. Called on the first scene load: the
+        /// library fills itself before the first scene, and a save applies its appearance only later.
+        /// </summary>
+        public static void RegisterAll()
+        {
+            if (_registeredAll) return;
+            if (!AvatarLook.LibraryReady)
+            {
+                Core.Log?.Warning("Avatar object library not loaded yet - tattoo registration waits for the next scene load.");
+                return;
+            }
+            _registeredAll = true;
+            int ok = 0;
+            foreach (TattooDef def in _all)
+                if (EnsureRegistered(def)) ok++;
+            Core.Log?.Msg($"Registered {ok} of {_all.Count} custom tattoo(s) with the avatar object library.");
+        }
+
+        /// <summary>
+        /// Id of the built-in tattoo that <paramref name="p"/> is cloned from, or null when the game no longer has
+        /// it. The shop category that lists this tattoo is the one that hosts the placement.
+        /// </summary>
+        public static string SourceObjectId(TattooPlacement p) =>
+            AvatarLook.TryResolve(SourceLayer(p), out var obj) && obj != null ? obj.Id : null;
 
         public static int AddRange(IEnumerable<TattooDef> defs)
         {
@@ -37,17 +71,8 @@ namespace Inkorporated.Registration
             return n;
         }
 
-        /// <summary>The path substring used to recognise which placement a built-in shop category hosts.</summary>
-        public static string CategoryToken(TattooPlacement p) => p switch
-        {
-            TattooPlacement.Chest => "/chest/",
-            TattooPlacement.LeftArm => "/leftarm/",
-            TattooPlacement.RightArm => "/rightarm/",
-            TattooPlacement.Face => "/face/",
-            _ => "/chest/"
-        };
-
-        // A built-in layer of each placement to clone (inherits its CombinedMaterial / Order / UV expectations).
+        // A built-in tattoo of each placement to clone (inherits its layer type, order and UV expectations). A legacy
+        // layer path; AvatarLook follows it to the 0.4.7 avatar object.
         private static string SourceLayer(TattooPlacement p) => p switch
         {
             TattooPlacement.Chest => "Avatar/Layers/Tattoos/chest/Chest_Bird",
@@ -57,8 +82,8 @@ namespace Inkorporated.Registration
             _ => "Avatar/Layers/Tattoos/chest/Chest_Bird"
         };
 
-        // Custom target path. Face uses a capital "/Face/" segment so BasicAvatarSettings.GetAvatarSettings()
-        // routes it to the face mesh (it checks tattooPath.Contains("/Face/")). Body placements must NOT contain it.
+        // The avatar object id. Kept in the shape of the former Resources path, so ids stay stable across versions;
+        // face vs body now follows from the cloned tattoo, not from the "/Face/" segment.
         private static string TargetPath(TattooDef def)
         {
             string seg = def.Placement == TattooPlacement.Face ? "Face" : def.Placement.ToString().ToLowerInvariant();
@@ -66,7 +91,7 @@ namespace Inkorporated.Registration
         }
 
         /// <summary>
-        /// Ensures the tattoo's avatar layer exists in the registry so Resources.Load resolves it.
+        /// Ensures the tattoo's avatar object exists in the game's library so an appearance carrying its id resolves.
         /// Idempotent. Returns true if the tattoo is ready to be applied/shown.
         /// </summary>
         public static bool EnsureRegistered(TattooDef def)
@@ -104,10 +129,10 @@ namespace Inkorporated.Registration
                 string target = TargetPath(def);
                 string source = SourceLayer(def.Placement);
 
-                bool ok = AvatarLayerFactory.CreateAndRegisterAvatarLayer(source, target, def.DisplayName ?? def.Id, tex);
+                bool ok = AvatarLook.RegisterCustomLayer(source, target, def.DisplayName ?? def.Id, tex);
                 if (!ok)
                 {
-                    Core.Log?.Warning($"Tattoo '{def.Key}': CreateAndRegisterAvatarLayer failed (source '{source}').");
+                    Core.Log?.Error($"Tattoo '{def.Key}': registering the avatar object failed (source '{source}').");
                     return false;
                 }
 
@@ -117,7 +142,7 @@ namespace Inkorporated.Registration
             }
             catch (Exception ex)
             {
-                Core.Log?.Warning($"Tattoo '{def.Key}': registration error - {ex.Message}");
+                Core.Log?.Error($"Tattoo '{def.Key}': registration error - {ex}");
                 return false;
             }
         }
