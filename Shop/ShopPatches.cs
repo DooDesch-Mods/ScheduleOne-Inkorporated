@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using HarmonyLib;
+using DooDesch.AvatarKit;
 using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using Il2CppScheduleOne.UI.CharacterCustomization;
 using Inkorporated.Model;
@@ -44,27 +45,48 @@ namespace Inkorporated.Shop
 
                 Il2CppArrayBase<CharacterCustomizationOption> existing =
                     category.GetComponentsInChildren<CharacterCustomizationOption>(true);
-                if (existing == null || existing.Length == 0) return;
+                if (existing == null || existing.Length == 0)
+                {
+                    Core.Log?.Warning($"Tattoo category '{category.CategoryName}' has no options to clone - nothing injected.");
+                    return;
+                }
 
                 CharacterCustomizationOption template = PickTemplate(existing);
-                if (template == null) return;
+                if (template == null)
+                {
+                    Core.Log?.Warning($"Tattoo category '{category.CategoryName}': no usable option to clone - nothing injected.");
+                    return;
+                }
 
-                // Which placement(s) does this category host? Built-in option labels carry the placement folder
-                // (e.g. ".../chest/...", ".../face/..."), so we only add tattoos whose placement matches.
-                var labels = new List<string>();
+                // Which placement does this category host? The one whose built-in source tattoo it lists.
+                var ids = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 for (int i = 0; i < existing.Length; i++)
                 {
-                    string lbl = existing[i] != null ? existing[i].Label : null;
-                    if (!string.IsNullOrEmpty(lbl)) labels.Add(lbl);
+                    string id = existing[i] != null && existing[i].AvatarObject != null ? existing[i].AvatarObject.Id : null;
+                    if (!string.IsNullOrEmpty(id)) ids.Add(id);
+                }
+                var hosted = new HashSet<TattooPlacement>();
+                foreach (TattooPlacement p in Enum.GetValues(typeof(TattooPlacement)))
+                {
+                    string src = TattooRegistry.SourceObjectId(p);
+                    if (src != null && ids.Contains(src)) hosted.Add(p);
+                }
+#if DEBUG
+                Core.Log?.Msg($"[shop] category '{category.CategoryName}' hosts [{string.Join(",", hosted)}]; options: {string.Join(", ", ids)}");
+#endif
+                if (hosted.Count == 0)
+                {
+                    Core.Log?.Msg($"Tattoo category '{category.CategoryName}' lists no source tattoo - no placement matched.");
+                    return;
                 }
 
                 int injected = 0;
                 foreach (TattooDef def in TattooRegistry.AllDefs)
                 {
-                    if (!LabelsContain(labels, TattooRegistry.CategoryToken(def.Placement))) continue;
+                    if (!hosted.Contains(def.Placement)) continue;
                     if (!TattooRegistry.EnsureRegistered(def)) continue;
-                    if (HasLabel(existing, def.ResourcePath)) continue;
-                    if (CloneOption(category, template, def)) injected++;
+                    if (ids.Contains(def.ResourcePath)) continue;
+                    if (CloneOption(template, def)) injected++;
                 }
 
                 if (injected > 0)
@@ -129,22 +151,7 @@ namespace Inkorporated.Shop
             return opts.Length > 0 ? opts[0] : null;
         }
 
-        private static bool LabelsContain(List<string> labels, string token)
-        {
-            foreach (string l in labels)
-                if (l.IndexOf(token, StringComparison.OrdinalIgnoreCase) >= 0) return true;
-            return false;
-        }
-
-        private static bool HasLabel(Il2CppArrayBase<CharacterCustomizationOption> opts, string label)
-        {
-            if (label == null) return false;
-            for (int i = 0; i < opts.Length; i++)
-                if (opts[i] != null && string.Equals(opts[i].Label, label, StringComparison.Ordinal)) return true;
-            return false;
-        }
-
-        private static bool CloneOption(CharacterCustomizationCategory category, CharacterCustomizationOption template, TattooDef def)
+        private static bool CloneOption(CharacterCustomizationOption template, TattooDef def)
         {
             try
             {
@@ -156,10 +163,21 @@ namespace Inkorporated.Shop
                 clone.name = "Inkorporated_" + def.Source + "_" + def.Id;
 
                 CharacterCustomizationOption opt = clone.GetComponent<CharacterCustomizationOption>();
-                if (opt == null) { UnityEngine.Object.Destroy(clone); return false; }
+                if (opt == null)
+                {
+                    UnityEngine.Object.Destroy(clone);
+                    Core.Log?.Error($"Tattoo '{def.Key}': cloned shop button lost its option component.");
+                    return false;
+                }
+                if (!AvatarLook.TryResolve(def.ResourcePath, out var obj) || obj == null)
+                {
+                    UnityEngine.Object.Destroy(clone);
+                    Core.Log?.Error($"Tattoo '{def.Key}': registered id '{def.ResourcePath}' is not in the avatar object library.");
+                    return false;
+                }
 
-                opt.Name = def.DisplayName;
-                opt.Label = def.ResourcePath;   // == registered Resources path; added to Tattoos on select
+                // The shop adds this object's id to the appearance on select; the button name comes from it too.
+                opt.AvatarObject = obj;
                 opt.Price = def.Price;
                 opt.RequireLevel = false;
 

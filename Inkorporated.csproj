@@ -24,17 +24,21 @@
        without saying so out loud. See Workspace/build/Deploy.props. -->
   <Import Project="$(MSBuildThisFileDirectory)../Workspace/build/Deploy.props" Condition="Exists('$(MSBuildThisFileDirectory)../Workspace/build/Deploy.props')" />
   <Import Project="$(MSBuildThisFileDirectory)Workspace/build/Deploy.props" Condition="Exists('$(MSBuildThisFileDirectory)Workspace/build/Deploy.props')" />
+  <!-- DooDesch.AvatarKit (AvatarLook): registers custom PNG tattoos as avatar objects under the 0.4.7 avatar
+       system. Linked source; MUST come after the Workspace Remove so CI keeps the files. -->
+  <Import Project="$(MSBuildThisFileDirectory)../Workspace/build/AvatarLayers.props" Condition="Exists('$(MSBuildThisFileDirectory)../Workspace/build/AvatarLayers.props')" />
+  <Import Project="$(MSBuildThisFileDirectory)Workspace/build/AvatarLayers.props" Condition="Exists('$(MSBuildThisFileDirectory)Workspace/build/AvatarLayers.props')" />
 
 
   <!--
     Inkorporated - MelonLoader IL2CPP custom-tattoo mod for Schedule I.
     Adds user-supplied PNG tattoos (chest / left arm / right arm / face) to the in-game tattoo shop.
-    Each PNG is loaded into a Texture2D (S1API TextureUtils), wrapped in a cloned AvatarLayer and
-    registered at a custom Resources path (S1API AvatarLayerFactory + RuntimeResourceRegistry patches
-    Resources.Load), so the game's own avatar pipeline renders it with no engine-level patching. Shop
-    buttons are injected by a Harmony prefix on CharacterCustomizationCategory.Awake that clones an
-    existing option before the game gathers + wires the category's options. Other mods can register
-    tattoos programmatically via the public Inkorporated API. Cloned from the Siesta template.
+    Each PNG is loaded into a Texture2D (S1API TextureUtils) and registered as an avatar object: a built-in
+    tattoo of the same placement is cloned with the custom texture and entered in the game's
+    AvatarObjectLibrary under its own id (AvatarLook.RegisterCustomLayer), so the game's own avatar pipeline
+    renders, saves and syncs it. Shop buttons are injected by a Harmony prefix on
+    CharacterCustomizationCategory.Awake that clones an existing option before the game gathers + wires the
+    category's options. Other mods can register tattoos programmatically via the public Inkorporated API.
   -->
 
   <PropertyGroup>
@@ -119,6 +123,15 @@
     </Reference>
     <Reference Include="S1API.Il2Cpp.MelonLoader">
       <HintPath>$(WorkspaceLibPath)/il2cpp/s1api/S1API.Il2Cpp.MelonLoader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <!-- NakedAppearance / AvatarObject: the 0.4.7 avatar system (via AvatarLayers.props). -->
+    <Reference Include="Il2CppScheduleOne.Core">
+      <HintPath>$(GameManagedPath)/Il2CppScheduleOne.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>$(GameManagedPath)/UnityEngine.AnimationModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
