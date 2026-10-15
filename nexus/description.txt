@@ -1,0 +1,88 @@
+=== SUMMARY ===
+The tattoo framework for Schedule I. Mods add custom PNG tattoos to the in-game tattoo shop - via a drop-in pack folder or an API - and the game renders, saves and co-op-syncs them like vanilla. On its own it adds no tattoos; it is the
+
+=== DESCRIPTION ===
+[size=5][b]Inkorporated - Custom Tattoos[/b][/size]
+
+[b]🛟 Need help or found a bug?[/b] Get support at [url=https://support.doodesch.de/inkorporated]support.doodesch.de/inkorporated[/url].
+
+[url=https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated]Source[/url] | [url=https://docs.doodesch.de/mods/inkorporated/]Documentation[/url] | [url=https://github.com/DooDesch-Mods/ScheduleOne-InkorporatedExample]Example pack and code mod[/url] | [url=https://www.nexusmods.com/profile/DooDesch/mods]More of my mods[/url]
+
+[url=https://polyfill.doomods.com/mod/inkorporated][img]https://polyfill.doomods.com/badge/inkorporated.png[/img][/url]
+
+[img]https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/header.jpg[/img]
+
+[b]Inkorporated[/b] is a tattoo framework for Schedule I - on its own it adds no tattoos. You install it because a tattoo pack you want lists it as a dependency, or because you are building one yourself. Once it is in, any pack under [font=Courier New]UserData/Inkorporated/Packs[/font] (or any tattoo registered through the API) shows up in the in-game tattoo shop: it renders on the avatar, persists in saves and syncs in co-op like a built-in tattoo. Built on [url=https://github.com/ifBars/S1API]S1API[/url].
+
+[quote][center][size=4][b]New in 1.1.4: works on Schedule I 0.4.7[/b][/size]
+
+Custom tattoos show in the shop and on your character again, and bought ones stay after a reload.
+
+Needs S1API 3.2.1.[/center][/quote]
+[size=4][b]Features[/b][/size]
+[list]
+[*]Adds custom tattoos to the in-game tattoo shop, sorted into their placement category (Chest, Left Arm, Right Arm, Face).
+[*]Each tattoo is registered in the game's own avatar object library - no asset bundles, no render hooks. It renders, saves and syncs in co-op the same way a built-in tattoo does.
+[*]Two ways to ship tattoos: a no-code pack folder (PNGs plus a small manifest.json), or a C# API for code mods that build textures at runtime.
+[*]Bundled example pack (off by default) with ready-made tattoos across every placement, doubling as a template for your own pack.
+[/list]
+[size=4][b]Screenshots[/b][/size]
+The tattoos shown come from a demo pack.
+
+[img]https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/shop.jpg[/img]
+[img]https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/swallows.jpg[/img]
+[img]https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/rose.jpg[/img]
+[img]https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/stars.jpg[/img]
+
+[size=4][b]Requirements[/b][/size]
+[list]
+[*]Schedule I, IL2CPP build, 0.4.7f12 or later.
+[*][url=https://github.com/LavaGang/MelonLoader]MelonLoader[/url] 0.7.3 or newer.
+[*][url=https://thunderstore.io/c/schedule-i/p/ifBars/S1API_Forked/]S1API[/url] (ifBars/S1API_Forked) 3.2.1 or newer - a mod manager pulls it in for you.
+[/list]
+[size=4][b]Installation[/b][/size]
+[b]Vortex:[/b] the release archive ships [font=Courier New]Inkorporated.dll[/font] under a [font=Courier New]mods/[/font] folder, so Vortex installs it as-is. Enable the download.
+
+[b]Manual:[/b]
+[list=1]
+[*]Install [url=https://github.com/LavaGang/MelonLoader]MelonLoader[/url] 0.7.3 or newer for Schedule I.
+[*]Install S1API (its DLLs go into [font=Courier New]Mods/[/font] and [font=Courier New]Plugins/[/font] per its own instructions).
+[*]Drop [font=Courier New]Inkorporated.dll[/font] into your Schedule I [font=Courier New]Mods/[/font] folder.
+[*]Launch the game once, then add tattoo packs (see below) or enable the bundled example pack (see Usage / Settings).
+[/list]Tattoo packs go under [font=Courier New]UserData/Inkorporated/Packs/&lt;PackName&gt;/[/font], not in [font=Courier New]Mods/[/font].
+
+[size=4][b]Usage / Settings[/b][/size]
+Install Inkorporated plus any tattoo pack that lists it as a dependency. The new tattoos appear in the tattoo shop under their placement tab, priced like a built-in tattoo (or "Free" if the pack sets no price).
+
+One setting lives in [font=Courier New]UserData/MelonPreferences.cfg[/font] under [font=Courier New]Inkorporated_01_Main[/font]:
+[list]
+[*][font=Courier New]LoadExamplePack[/font] (default: off) - drops the bundled example pack into [font=Courier New]UserData/Inkorporated/Packs/Examples[/font] on the next launch: a few ready-made tattoos plus a folder/manifest template to copy. Never overwrites an existing Examples folder. Needs a game restart.
+[/list]
+[size=4][b]Compatibility[/b][/size]
+[list]
+[*][b]Multiplayer:[/b] the game sends each tattoo as its avatar object id over its own netcode, so Inkorporated adds none. Every player needs Inkorporated and the same pack to see each other's custom tattoos. A player without them does not render that tattoo - no desync, no crash.
+[*][b]Save-safe:[/b] yes. Remove Inkorporated or a pack later and the game skips any tattoo it cannot resolve on load. The character stops showing that tattoo.
+[*][b]Known conflicts:[/b] none reported. Inkorporated adds its shop buttons through a Harmony patch on the tattoo-shop category's Awake. Another mod that patches the same method is untested.
+[/list]
+[size=4][b]For pack authors[/b][/size]
+No code needed for a basic pack. Create [font=Courier New]UserData/Inkorporated/Packs/&lt;YourPack&gt;/manifest.json[/font]:
+[code]{
+  "name": "My Pack",
+  "author": "you",
+  "tattoos": [
+    { "id": "skull", "name": "Skull", "placement": "chest", "file": "skull.png" },
+    { "id": "tear", "name": "Teardrop", "placement": "face", "file": "tear.png", "price": 250 }
+  ]
+}[/code][list]
+[*][font=Courier New]placement[/font]: chest, leftarm, rightarm or face.
+[*][font=Courier New]price[/font]: optional, omit or 0 for "Free".
+[*][font=Courier New]file[/font]: PNG filename in the pack folder; defaults to &lt;id&gt;.png.
+[*]Each PNG is a full UV-space skin texture, not a sticker - opaque pixels must sit at that body part's UV region. Recommended canvas: 2048x2048 for body/arms, 512x512 for face.
+[/list]Code mods can register tattoos at runtime through [font=Courier New]Inkorporated.API[/font] (RegisterTattoo / RegisterTattooFromFile / RegisterTattooFromResource). The pack format, the API reference and UV authoring are in the [url=https://docs.doodesch.de/mods/inkorporated/]documentation[/url]; a ready-to-copy project with both routes is in the [url=https://github.com/DooDesch-Mods/ScheduleOne-InkorporatedExample]example repo[/url].
+
+[size=4][b]Credits[/b][/size]
+[list]
+[*]DooDesch - mod author.
+[*][url=https://github.com/ifBars/S1API]S1API[/url] by ifBars - the modding API this is built on (texture loading helpers).
+[*]MIT licensed.
+[/list]
