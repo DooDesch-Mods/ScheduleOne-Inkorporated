@@ -14,7 +14,7 @@
 ![Type](https://img.shields.io/badge/type-library%2Fdependency-lightgrey)
 [![Polyfill](https://polyfill.doomods.com/badge/inkorporated.svg)](https://polyfill.doomods.com/mod/inkorporated)
 
-[![MLVScan Inkorporated.dll](https://mlvscan.com/attestations/att_-CoeFr4jPDzIAspZx3j1gOU8/badge.svg)](https://mlvscan.com/attestations/att_-CoeFr4jPDzIAspZx3j1gOU8)
+[![MLVScan Inkorporated.dll](https://mlvscan.com/attestations/att_61uSb3i3lWVoHVb34_TBkQbC/badge.svg)](https://mlvscan.com/attestations/att_61uSb3i3lWVoHVb34_TBkQbC)
 
 Inkorporated is primarily a **library / dependency**. On its own it adds no tattoos - it's the thing
 tattoo packs depend on. Install it alongside a tattoo pack (or flip on the bundled example pack) and
