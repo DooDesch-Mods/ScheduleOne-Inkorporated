@@ -62,4 +62,4 @@ mark to a full sleeve). See the example pack and the full guide on
 
 ## License
 
-MIT. See the included LICENSE.md.
+DooDesch API License - build on the API, do not copy the code. See [LICENSE.md](https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated/blob/main/LICENSE.md).
