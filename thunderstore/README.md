@@ -13,7 +13,7 @@
 ![S1API](https://img.shields.io/badge/S1API-required-orange)
 [![Polyfill](https://polyfill.doomods.com/badge/inkorporated.svg)](https://polyfill.doomods.com/mod/inkorporated)
 
-[![MLVScan Inkorporated.dll](https://mlvscan.com/attestations/att_61uSb3i3lWVoHVb34_TBkQbC/badge.svg)](https://mlvscan.com/attestations/att_61uSb3i3lWVoHVb34_TBkQbC)
+[![MLVScan Inkorporated.dll](https://mlvscan.com/attestations/att_7FR59k51hnF68qlFdPPLxtY0/badge.svg)](https://mlvscan.com/attestations/att_7FR59k51hnF68qlFdPPLxtY0)
 
 ![Custom tattoos in the tattoo shop, worn by the player](https://raw.githubusercontent.com/DooDesch-Mods/ScheduleOne-Inkorporated/main/docs/img/header.jpg)
 
