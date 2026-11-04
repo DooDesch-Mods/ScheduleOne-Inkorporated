@@ -2,6 +2,8 @@
 
 > 🛟 **Need help or found a bug?** Get support at [support.doodesch.de/inkorporated](https://support.doodesch.de/inkorporated).
 
+[![Discord](https://mods.doodesch.de/img/badge.svg)](https://mods.doodesch.de)
+
 > **The tattoo framework for Schedule I.** Mods add their own PNG tattoos to the in-game tattoo shop -
 > via a drop-in pack folder or an API - and the game treats them like vanilla: they render on the
 > avatar, persist in saves and sync in co-op. On its own this mod adds no tattoos; it's the dependency
@@ -59,6 +61,12 @@ mark to a full sleeve). See the example pack and the full guide on
 ## Settings
 
 `LoadExamplePack` (default `false`) - drop the bundled example pack on disk as a template. Editable in `UserData/MelonPreferences.cfg`.
+
+## Community
+
+[![DooDesch Mods on Discord](https://mods.doodesch.de/img/card.svg)](https://mods.doodesch.de)
+
+Join the DooDesch Mods Discord: update pings, polls on what comes next, and playtests of new mods.
 
 ## License
 

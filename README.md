@@ -4,6 +4,8 @@
 
 **Download:** [Nexus Mods](https://www.nexusmods.com/schedule1/mods/2214) · [Thunderstore](https://thunderstore.io/c/schedule-i/p/DooDesch/Inkorporated/) · [GitHub Releases](https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated/releases)
 
+[![Discord](https://mods.doodesch.de/img/badge.svg)](https://mods.doodesch.de)
+
 > The tattoo framework for Schedule I. Inkorporated lets mods add their own PNG tattoos to the
 > in-game tattoo shop - drop a pack folder, or register via the API - and the game treats them
 > exactly like vanilla tattoos: they render on the avatar, persist in saves and sync in co-op.
@@ -174,6 +176,12 @@ are needed.
 - **Multiplayer:** custom tattoos are transmitted as their avatar object id. Every player needs
   Inkorporated **and the same pack** for them to render on each other; players without it simply don't show
   that tattoo (no desync, no crash).
+
+## Community
+
+[![DooDesch Mods on Discord](https://mods.doodesch.de/img/card.svg)](https://mods.doodesch.de)
+
+Join the DooDesch Mods Discord: update pings, polls on what comes next, and playtests of new mods.
 
 ## Credits
 
