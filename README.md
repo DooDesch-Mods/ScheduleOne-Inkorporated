@@ -4,8 +4,6 @@
 
 **Download:** [Nexus Mods](https://www.nexusmods.com/schedule1/mods/2214) · [Thunderstore](https://thunderstore.io/c/schedule-i/p/DooDesch/Inkorporated/) · [GitHub Releases](https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated/releases)
 
-[![Discord](https://mods.doodesch.de/img/badge.svg)](https://mods.doodesch.de)
-
 > The tattoo framework for Schedule I. Inkorporated lets mods add their own PNG tattoos to the
 > in-game tattoo shop - drop a pack folder, or register via the API - and the game treats them
 > exactly like vanilla tattoos: they render on the avatar, persist in saves and sync in co-op.
@@ -16,7 +14,7 @@
 ![MelonLoader](https://img.shields.io/badge/MelonLoader-0.7.3+-green)
 ![S1API](https://img.shields.io/badge/S1API-required-orange)
 ![Type](https://img.shields.io/badge/type-library%2Fdependency-lightgrey)
-[![Polyfill](https://polyfill.doomods.com/badge/inkorporated.svg)](https://polyfill.doomods.com/mod/inkorporated)
+[![Discord](https://mods.doodesch.de/img/badge.svg)](https://mods.doodesch.de) [![Polyfill](https://polyfill.doomods.com/badge/inkorporated.svg)](https://polyfill.doomods.com/mod/inkorporated)
 
 [![MLVScan Inkorporated.dll](https://mlvscan.com/attestations/att_7FR59k51hnF68qlFdPPLxtY0/badge.svg)](https://mlvscan.com/attestations/att_7FR59k51hnF68qlFdPPLxtY0)
 
