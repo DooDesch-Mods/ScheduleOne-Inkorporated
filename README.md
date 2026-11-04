@@ -2,6 +2,8 @@
 
 > 🛟 **Need help or found a bug?** Get support at [support.doodesch.de/inkorporated](https://support.doodesch.de/inkorporated).
 
+**Download:** [Nexus Mods](https://www.nexusmods.com/schedule1/mods/2214) · [Thunderstore](https://thunderstore.io/c/schedule-i/p/DooDesch/Inkorporated/) · [GitHub Releases](https://github.com/DooDesch-Mods/ScheduleOne-Inkorporated/releases)
+
 > The tattoo framework for Schedule I. Inkorporated lets mods add their own PNG tattoos to the
 > in-game tattoo shop - drop a pack folder, or register via the API - and the game treats them
 > exactly like vanilla tattoos: they render on the avatar, persist in saves and sync in co-op.
@@ -62,9 +64,18 @@ The tattoos shown come from a demo pack.
 
 ## Installation
 
-### Recommended: a Thunderstore mod manager
+### Recommended: Nexus Mods
+
+1. Install **MelonLoader 0.7.3** for Schedule I ([melonwiki.xyz](https://melonwiki.xyz/)).
+2. Download Inkorporated from [Nexus Mods](https://www.nexusmods.com/schedule1/mods/2214) and install it with Vortex,
+   or put **`Inkorporated.dll`** into your Schedule I `Mods/` folder.
+3. Get S1API from its [Nexus page](https://www.nexusmods.com/schedule1/mods/1194) the same way.
+4. Install any tattoo pack that lists Inkorporated as a dependency.
+
+### Thunderstore mod manager
+
 Install with r2modman / Gale from the Schedule I community; the dependencies (MelonLoader, S1API) are
-pulled in automatically. Then install any tattoo pack that lists Inkorporated as a dependency.
+pulled in automatically. Then install any tattoo pack that lists Inkorporated as a dependency. The [Thunderstore page](https://thunderstore.io/c/schedule-i/p/DooDesch/Inkorporated/) has the package.
 
 ### Manual
 1. Install **MelonLoader 0.7.3** for Schedule I.
