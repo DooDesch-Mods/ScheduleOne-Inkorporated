@@ -2,8 +2,6 @@
 
 > 🛟 **Need help or found a bug?** Get support at [support.doodesch.de/inkorporated](https://support.doodesch.de/inkorporated).
 
-[![Discord](https://mods.doodesch.de/img/badge.svg)](https://mods.doodesch.de)
-
 > **The tattoo framework for Schedule I.** Mods add their own PNG tattoos to the in-game tattoo shop -
 > via a drop-in pack folder or an API - and the game treats them like vanilla: they render on the
 > avatar, persist in saves and sync in co-op. On its own this mod adds no tattoos; it's the dependency
@@ -13,7 +11,7 @@
 ![Game](https://img.shields.io/badge/game-Schedule%20I-purple)
 ![MelonLoader](https://img.shields.io/badge/MelonLoader-0.7.3+-green)
 ![S1API](https://img.shields.io/badge/S1API-required-orange)
-[![Polyfill](https://polyfill.doomods.com/badge/inkorporated.svg)](https://polyfill.doomods.com/mod/inkorporated)
+[![Discord](https://mods.doodesch.de/img/badge.svg)](https://mods.doodesch.de) [![Polyfill](https://polyfill.doomods.com/badge/inkorporated.svg)](https://polyfill.doomods.com/mod/inkorporated)
 
 [![MLVScan Inkorporated.dll](https://mlvscan.com/attestations/att_7FR59k51hnF68qlFdPPLxtY0/badge.svg)](https://mlvscan.com/attestations/att_7FR59k51hnF68qlFdPPLxtY0)
 
